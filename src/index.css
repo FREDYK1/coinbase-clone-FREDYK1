@@ -1,0 +1,994 @@
+@import "tailwindcss";
+
+/* ====================================
+   COINBASE ACTUAL WEBSITE CSS TOKENS
+   Based on www.coinbase.com
+   ==================================== */
+
+:root {
+  /* ===== FONT FAMILIES (from actual Coinbase) ===== */
+  --cds-font-display: 'CoinbaseSans', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --cds-font-sans: 'CoinbaseSans', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --cds-font-text: 'CoinbaseSans', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --cds-font-mono: 'CoinbaseMono', 'Menlo', 'Consolas', monospace;
+
+  /* ===== SPACING (from actual Coinbase - 8px base unit) ===== */
+  --space-0: 0px;
+  --space-0_25: 2px;
+  --space-0_5: 4px;
+  --space-0_75: 6px;
+  --space-1: 8px;
+  --space-1_5: 12px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --space-9: 72px;
+  --space-10: 80px;
+
+  /* ===== BORDER WIDTH ===== */
+  --borderWidth-0: 0px;
+  --borderWidth-100: 1px;
+  --borderWidth-200: 2px;
+  --borderWidth-300: 4px;
+  --borderWidth-400: 6px;
+  --borderWidth-500: 8px;
+
+  /* ===== BORDER RADIUS (from actual Coinbase) ===== */
+  --borderRadius-0: 0px;
+  --borderRadius-100: 4px;
+  --borderRadius-200: 8px;
+  --borderRadius-300: 12px;
+  --borderRadius-400: 16px;
+  --borderRadius-500: 24px;
+  --borderRadius-600: 32px;
+  --borderRadius-700: 40px;
+  --borderRadius-800: 48px;
+  --borderRadius-900: 56px;
+  --borderRadius-1000: 100000px;
+
+  /* ===== ICON SIZES ===== */
+  --iconSize-xs: 12px;
+  --iconSize-s: 16px;
+  --iconSize-m: 24px;
+  --iconSize-l: 32px;
+
+  /* ===== AVATAR SIZES ===== */
+  --avatarSize-s: 16px;
+  --avatarSize-m: 24px;
+  --avatarSize-l: 32px;
+  --avatarSize-xl: 40px;
+  --avatarSize-xxl: 48px;
+  --avatarSize-xxxl: 56px;
+
+  /* ===== COLOR PALETTE (from actual Coinbase) ===== */
+  /* Blue */
+  --blue0: 245,248,255;
+  --blue5: 211,225,255;
+  --blue10: 176,202,255;
+  --blue15: 146,182,255;
+  --blue20: 115,162,255;
+  --blue30: 70,132,255;
+  --blue40: 38,110,255;
+  --blue50: 16,94,255;
+  --blue60: 0,82,255;
+  --blue70: 0,75,235;
+  --blue80: 0,62,193;
+  --blue90: 0,41,130;
+  --blue100: 0,24,77;
+
+  /* Green */
+  --green0: 245,255,251;
+  --green5: 203,245,227;
+  --green10: 163,235,205;
+  --green15: 131,224,186;
+  --green20: 101,214,167;
+  --green30: 60,194,138;
+  --green40: 34,173,115;
+  --green50: 18,153,97;
+  --green60: 9,133,81;
+  --green70: 4,112,67;
+  --green80: 2,83,50;
+  --green90: 0,57,35;
+  --green100: 0,31,18;
+
+  /* Red */
+  --red0: 255,245,246;
+  --red5: 254,225,228;
+  --red10: 253,206,210;
+  --red15: 251,186,191;
+  --red20: 249,166,173;
+  --red30: 244,127,136;
+  --red40: 237,89,102;
+  --red50: 225,57,71;
+  --red60: 207,32,47;
+  --red70: 181,15,29;
+  --red80: 145,5,16;
+  --red90: 100,1,9;
+  --red100: 51,0,4;
+
+  /* Orange */
+  --orange0: 255,250,245;
+  --orange5: 254,232,210;
+  --orange10: 253,213,176;
+  --orange50: 225,89,27;
+  --orange60: 207,71,14;
+  --orange70: 181,54,6;
+
+  /* Gray */
+  --gray0: 255,255,255;
+  --gray5: 247,248,249;
+  --gray10: 238,240,243;
+  --gray15: 222,225,231;
+  --gray20: 206,210,219;
+  --gray30: 177,183,195;
+  --gray40: 137,144,158;
+  --gray50: 113,120,134;
+  --gray60: 91,97,110;
+  --gray70: 70,75,85;
+  --gray80: 50,53,61;
+  --gray90: 30,32,37;
+  --gray100: 10,11,13;
+
+  /* ===== SEMANTIC COLORS (Light Mode - from actual Coinbase) ===== */
+  --color-fg: rgb(10,11,13);
+  --color-fgMuted: rgb(91,97,110);
+  --color-fgInverse: rgb(255,255,255);
+  --color-fgPrimary: rgb(0,82,255);
+  --color-fgWarning: rgb(207,71,14);
+  --color-fgPositive: rgb(9,133,81);
+  --color-fgNegative: rgb(207,32,47);
+  
+  --color-bg: rgb(255,255,255);
+  --color-bgAlternate: rgb(238,240,243);
+  --color-bgInverse: rgb(10,11,13);
+  --color-bgOverlay: rgba(50,53,61,0.33);
+  --color-bgPrimary: rgb(0,82,255);
+  --color-bgPrimaryWash: rgb(245,248,255);
+  --color-bgSecondary: rgb(238,240,243);
+  --color-bgTertiary: rgb(206,210,219);
+  --color-bgSecondaryWash: rgb(247,248,249);
+  --color-bgNegative: rgb(207,32,47);
+  --color-bgNegativeWash: rgb(255,245,246);
+  --color-bgPositive: rgb(9,133,81);
+  --color-bgPositiveWash: rgb(245,255,251);
+  --color-bgWarning: rgb(237,112,47);
+  --color-bgWarningWash: rgb(255,250,245);
+  --color-transparent: rgba(255,255,255,0);
+  
+  --color-bgLine: rgba(91,97,110,0.2);
+  --color-bgLineHeavy: rgba(91,97,110,0.66);
+  --color-bgLineInverse: rgb(255,255,255);
+  --color-bgLinePrimary: rgb(0,82,255);
+  --color-bgLinePrimarySubtle: rgb(115,162,255);
+  
+  --color-bgElevation1: rgb(255,255,255);
+  --color-bgElevation2: rgb(255,255,255);
+  
+  /* Interactive states (from actual Coinbase) */
+  --color-bgBrandHovered: rgba(0, 72, 224, 0.88);
+  --color-bgBrandPressed: rgba(0, 67, 209, 0.82);
+  --color-bgPrimaryHovered: rgba(17, 18, 20, 0.88);
+  --color-bgPrimaryPressed: rgba(21, 22, 24, 0.82);
+  --color-bgSecondaryHovered: rgba(229, 231, 234, 0.88);
+  --color-bgSecondaryPressed: rgba(242, 244, 246, 0.82);
+  --color-bgTertiaryHovered: rgba(247, 247, 247, 0.88);
+  --color-bgTertiaryPressed: rgba(244, 244, 244, 0.82);
+
+  /* ===== SHADOWS (from actual Coinbase) ===== */
+  --shadow-elevation1: 0px 8px 12px rgba(0, 0, 0, 0.12);
+  --shadow-elevation2: 0px 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* ===== LEGACY CDS TOKENS FOR COMPATIBILITY ===== */
+  --cds-fg: var(--color-fg);
+  --cds-fg-muted: var(--color-fgMuted);
+  --cds-fg-inverse: var(--color-fgInverse);
+  --cds-fg-primary: var(--color-fgPrimary);
+  --cds-fg-positive: var(--color-fgPositive);
+  --cds-fg-negative: var(--color-fgNegative);
+  --cds-bg: var(--color-bg);
+  --cds-bg-alternate: var(--color-bgAlternate);
+  --cds-bg-inverse: var(--color-bgInverse);
+  --cds-bg-primary: var(--color-bgPrimary);
+  --cds-bg-secondary: var(--color-bgSecondary);
+  --cds-bg-positive: var(--color-bgPositive);
+  --cds-bg-negative: var(--color-bgNegative);
+  --cds-line: var(--color-bgLine);
+  --cds-line-heavy: var(--color-bgLineHeavy);
+
+  /* Legacy color scales */
+  --cds-blue-60: rgb(0,82,255);
+  --cds-blue-70: rgb(0,75,235);
+  --cds-green-60: rgb(9,133,81);
+  --cds-red-60: rgb(207,32,47);
+  --cds-gray-0: rgb(255,255,255);
+  --cds-gray-5: rgb(247,248,249);
+  --cds-gray-10: rgb(238,240,243);
+  --cds-gray-15: rgb(222,225,231);
+  --cds-gray-20: rgb(206,210,219);
+  --cds-gray-60: rgb(91,97,110);
+  --cds-gray-100: rgb(10,11,13);
+}
+
+/* ===== DARK THEME ===== */
+[data-theme="dark"], .dark {
+  --color-fg: rgb(255,255,255);
+  --color-fgMuted: rgb(138,145,158);
+  --color-fgInverse: rgb(10,11,13);
+  --color-fgPrimary: rgb(87,139,250);
+  --color-fgPositive: rgb(39,173,117);
+  --color-fgNegative: rgb(240,97,109);
+  
+  --color-bg: rgb(10,11,13);
+  --color-bgAlternate: rgb(20,21,25);
+  --color-bgInverse: rgb(255,255,255);
+  --color-bgSecondary: rgb(40,43,49);
+  --color-bgTertiary: rgb(50,53,61);
+  --color-bgElevation1: rgb(20,21,25);
+  --color-bgElevation2: rgb(30,32,37);
+  
+  --color-bgLine: rgba(138,145,158,0.2);
+  --color-bgLineHeavy: rgba(138,145,158,0.66);
+  
+  --color-bgBrandHovered: rgba(95, 144, 250, 0.88);
+  --color-bgBrandPressed: rgba(99, 147, 250, 0.82);
+  --color-bgSecondaryHovered: rgba(47, 50, 55, 0.88);
+  --color-bgSecondaryPressed: rgba(50, 53, 59, 0.82);
+  --color-bgTertiaryHovered: rgba(17, 18, 20, 0.88);
+  --color-bgTertiaryPressed: rgba(21, 22, 24, 0.82);
+}
+
+/* ===== GLOBAL STYLES (from actual Coinbase) ===== */
+@layer base {
+  html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    box-sizing: border-box;
+    height: -webkit-fill-available;
+  }
+  
+  body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    overflow-x: hidden;
+    margin: 0;
+    font-family: 'CoinbaseSans', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    color: var(--color-fg);
+    background-color: var(--color-bg);
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  a {
+    color: #0667d0;
+    text-decoration: none;
+    background-color: transparent;
+  }
+  
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+  
+  img {
+    border-style: none;
+    display: block;
+    max-width: 100%;
+  }
+}
+
+/* ===== COINBASE TYPOGRAPHY CLASSES (from actual website) ===== */
+
+/* Display styles - d1, d2, d3, d4 */
+.d1-ff { font-family: var(--cds-font-display); }
+.d1-fw { font-weight: 400; }
+.d1-fs { font-size: 64px; }
+.d1-lh { line-height: 64px; }
+
+.d2-ff { font-family: var(--cds-font-display); }
+.d2-fw { font-weight: 400; }
+.d2-fs { font-size: 52px; }
+.d2-lh { line-height: 52px; }
+
+.d3-ff { font-family: var(--cds-font-display); }
+.d3-fw { font-weight: 400; }
+.d3-fs { font-size: 44px; }
+.d3-lh { line-height: 44px; }
+
+.d4-ff { font-family: var(--cds-font-display); }
+.d4-fw { font-weight: 400; }
+.d4-fs { font-size: 40px; }
+.d4-lh { line-height: 40px; }
+
+/* Title styles - t1, t2, t3, t4, t5 */
+.t1-ff { font-family: var(--cds-font-display); }
+.t1-fw { font-weight: 400; }
+.t1-fs { font-size: 36px; }
+.t1-lh { line-height: 40px; }
+
+.t2-ff { font-family: var(--cds-font-display); }
+.t2-fw { font-weight: 400; }
+.t2-fs { font-size: 32px; }
+.t2-lh { line-height: 36px; }
+
+.t3-ff { font-family: var(--cds-font-sans); }
+.t3-fw { font-weight: 400; }
+.t3-fs { font-size: 28px; }
+.t3-lh { line-height: 32px; }
+
+.t4-ff { font-family: var(--cds-font-sans); }
+.t4-fw { font-weight: 400; }
+.t4-fs { font-size: 24px; }
+.t4-lh { line-height: 28px; }
+
+.t5-ff { font-family: var(--cds-font-sans); }
+.t5-fw { font-weight: 400; }
+.t5-fs { font-size: 20px; }
+.t5-lh { line-height: 24px; }
+
+/* Headline style */
+.h-ff { font-family: var(--cds-font-sans); }
+.h-fw { font-weight: 600; }
+.h-fs { font-size: 20px; }
+.h-lh { line-height: 28px; }
+
+/* Body style */
+.b-ff { font-family: var(--cds-font-text); }
+.b-fw { font-weight: 400; }
+.b-fs { font-size: 18px; }
+.b-lh { line-height: 28px; }
+
+/* Label styles - l1, l2, l3 */
+.l1-ff { font-family: var(--cds-font-sans); }
+.l1-fw { font-weight: 600; }
+.l1-fs { font-size: 18px; }
+.l1-lh { line-height: 24px; }
+
+.l2-ff { font-family: var(--cds-font-sans); }
+.l2-fw { font-weight: 600; }
+.l2-fs { font-size: 16px; }
+.l2-lh { line-height: 20px; }
+
+.l3-ff { font-family: var(--cds-font-sans); }
+.l3-fw { font-weight: 600; }
+.l3-fs { font-size: 13px; }
+.l3-lh { line-height: 16px; }
+
+/* Caption style */
+.c-ff { font-family: var(--cds-font-text); }
+.c-fw { font-weight: 400; }
+.c-fs { font-size: 16px; }
+.c-lh { line-height: 24px; }
+
+/* Legal style */
+.l-ff { font-family: var(--cds-font-text); }
+.l-fw { font-weight: 400; }
+.l-fs { font-size: 13px; }
+.l-lh { line-height: 20px; }
+
+/* Responsive typography - Desktop (1280px+) */
+@media (min-width: 1280px) {
+  .d1-fs-d { font-size: 96px; }
+  .d2-fs-d { font-size: 80px; }
+  .d3-fs-d { font-size: 64px; }
+  .d4-fs-d { font-size: 52px; }
+  .t1-fs-d { font-size: 44px; }
+  .t2-fs-d { font-size: 40px; }
+  .t3-fs-d { font-size: 36px; }
+  .t4-fs-d { font-size: 32px; }
+  .t5-fs-d { font-size: 28px; }
+  .d1-lh-d { line-height: 96px; }
+  .d2-lh-d { line-height: 80px; }
+  .d3-lh-d { line-height: 64px; }
+  .d4-lh-d { line-height: 52px; }
+  .t1-lh-d { line-height: 48px; }
+  .t2-lh-d { line-height: 44px; }
+  .t3-lh-d { line-height: 40px; }
+  .t4-lh-d { line-height: 36px; }
+  .t5-lh-d { line-height: 32px; }
+}
+
+/* Responsive typography - Tablet (768-1279px) */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .d1-fs-t { font-size: 80px; }
+  .d2-fs-t { font-size: 64px; }
+  .d3-fs-t { font-size: 52px; }
+  .d4-fs-t { font-size: 44px; }
+  .t1-fs-t { font-size: 40px; }
+  .t2-fs-t { font-size: 36px; }
+  .t3-fs-t { font-size: 32px; }
+  .t4-fs-t { font-size: 28px; }
+  .t5-fs-t { font-size: 24px; }
+  .d1-lh-t { line-height: 80px; }
+  .d2-lh-t { line-height: 64px; }
+  .d3-lh-t { line-height: 52px; }
+  .d4-lh-t { line-height: 44px; }
+  .t1-lh-t { line-height: 44px; }
+  .t2-lh-t { line-height: 40px; }
+  .t3-lh-t { line-height: 36px; }
+  .t4-lh-t { line-height: 32px; }
+  .t5-lh-t { line-height: 28px; }
+}
+
+/* Responsive typography - Mobile (max-767px) */
+@media (max-width: 767px) {
+  .d1-fs-m { font-size: 64px; }
+  .d2-fs-m { font-size: 52px; }
+  .d3-fs-m { font-size: 44px; }
+  .d4-fs-m { font-size: 40px; }
+  .t1-fs-m { font-size: 36px; }
+  .t2-fs-m { font-size: 32px; }
+  .t3-fs-m { font-size: 28px; }
+  .t4-fs-m { font-size: 24px; }
+  .t5-fs-m { font-size: 20px; }
+  .d1-lh-m { line-height: 64px; }
+  .d2-lh-m { line-height: 52px; }
+  .d3-lh-m { line-height: 44px; }
+  .d4-lh-m { line-height: 40px; }
+  .t1-lh-m { line-height: 40px; }
+  .t2-lh-m { line-height: 36px; }
+  .t3-lh-m { line-height: 32px; }
+  .t4-lh-m { line-height: 28px; }
+  .t5-lh-m { line-height: 24px; }
+}
+
+/* ===== COINBASE COMPONENT CLASSES (from actual website) ===== */
+@layer components {
+  /* ===== BUTTON STYLES (exact Coinbase) ===== */
+  .cdx-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1_5);
+    font-family: var(--cds-font-sans);
+    font-weight: 600;
+    border: none;
+    border-radius: var(--borderRadius-1000);
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  
+  .cdx-button[aria-disabled='true'],
+  .cdx-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Button Size - Default (44px) */
+  .cdx-button {
+    min-height: 44px;
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+    font-size: 16px;
+    line-height: 20px;
+  }
+  
+  /* Button Size - Large (56px) */
+  .cdx-button-lg {
+    min-height: 56px;
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+    font-size: 18px;
+  }
+  
+  /* Button Size - Small (36px) */
+  .cdx-button-sm {
+    min-height: 36px;
+    padding-left: var(--space-2);
+    padding-right: var(--space-2);
+    font-size: 14px;
+  }
+  
+  /* Primary Button (Blue background) */
+  .cdx-button-primary {
+    background-color: var(--color-fgPrimary);
+    border-color: var(--color-fgPrimary);
+    color: var(--color-fgInverse);
+  }
+  
+  .cdx-button-primary:hover:not(:disabled) {
+    background-color: var(--color-bgBrandHovered);
+    border-color: var(--color-bgBrandHovered);
+  }
+  
+  .cdx-button-primary:active:not(:disabled) {
+    background-color: var(--color-bgBrandPressed);
+    border-color: var(--color-bgBrandPressed);
+  }
+  
+  /* Secondary Button (Gray background) */
+  .cdx-button-secondary {
+    background-color: var(--color-bgSecondary);
+    border-color: var(--color-bgSecondary);
+    color: var(--color-fg);
+  }
+  
+  .cdx-button-secondary:hover:not(:disabled) {
+    background-color: var(--color-bgSecondaryHovered);
+    border-color: var(--color-bgSecondaryHovered);
+  }
+  
+  .cdx-button-secondary:active:not(:disabled) {
+    background-color: var(--color-bgSecondaryPressed);
+    border-color: var(--color-bgSecondaryPressed);
+  }
+  
+  /* Tertiary Button (Transparent) */
+  .cdx-button-tertiary {
+    background-color: var(--color-bg);
+    border-color: var(--color-bg);
+    color: var(--color-fg);
+  }
+  
+  .cdx-button-tertiary:hover:not(:disabled) {
+    background-color: var(--color-bgTertiaryHovered);
+    border-color: var(--color-bgTertiaryHovered);
+  }
+  
+  .cdx-button-tertiary:active:not(:disabled) {
+    background-color: var(--color-bgTertiaryPressed);
+    border-color: transparent;
+  }
+  
+  /* Inverse Button (Dark background on light, Light on dark) */
+  .cdx-button-inverse {
+    background-color: var(--color-bgInverse);
+    border-color: var(--color-bgInverse);
+    color: var(--color-fgInverse);
+  }
+  
+  .cdx-button-inverse:hover:not(:disabled) {
+    background-color: var(--color-bgPrimaryHovered);
+    border-color: var(--color-bgPrimaryHovered);
+  }
+  
+  /* Positive Button */
+  .cdx-button-positive {
+    background-color: var(--color-bgPositive);
+    color: var(--color-fgInverse);
+  }
+  
+  /* Negative Button */
+  .cdx-button-negative {
+    background-color: var(--color-bgNegative);
+    color: var(--color-fgInverse);
+  }
+  
+  /* Block (full width) Button */
+  .cdx-button-block {
+    width: 100%;
+  }
+  
+  /* Icon-only Button */
+  .cdx-button-icon {
+    min-width: 44px;
+    width: 44px;
+    min-height: 44px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* ===== LEGACY CDS BUTTON COMPATIBILITY ===== */
+  .cds-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1_5);
+    font-family: var(--cds-font-sans);
+    font-weight: 600;
+    font-size: 16px;
+    border: none;
+    border-radius: var(--borderRadius-1000);
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    text-decoration: none;
+    white-space: nowrap;
+    min-height: 44px;
+    padding: var(--space-1_5) var(--space-3);
+  }
+  
+  .cds-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .cds-btn-primary {
+    background-color: var(--color-fgPrimary);
+    color: var(--color-fgInverse);
+  }
+  
+  .cds-btn-primary:hover:not(:disabled) {
+    background-color: var(--color-bgBrandHovered);
+  }
+  
+  .cds-btn-secondary {
+    background-color: var(--color-bgSecondary);
+    color: var(--color-fg);
+  }
+  
+  .cds-btn-secondary:hover:not(:disabled) {
+    background-color: var(--color-bgSecondaryHovered);
+  }
+  
+  .cds-btn-tertiary {
+    background-color: transparent;
+    color: var(--color-fg);
+  }
+  
+  .cds-btn-tertiary:hover:not(:disabled) {
+    background-color: var(--color-bgTertiaryHovered);
+  }
+  
+  .cds-btn-ghost {
+    background-color: transparent;
+    color: var(--color-fgPrimary);
+  }
+  
+  .cds-btn-positive {
+    background-color: var(--color-bgPositive);
+    color: var(--color-fgInverse);
+  }
+  
+  .cds-btn-negative {
+    background-color: var(--color-bgNegative);
+    color: var(--color-fgInverse);
+  }
+  
+  .cds-btn-sm {
+    min-height: 36px;
+    padding: var(--space-1) var(--space-2);
+    font-size: 14px;
+  }
+  
+  .cds-btn-lg {
+    min-height: 56px;
+    padding: var(--space-2) var(--space-4);
+    font-size: 18px;
+  }
+  
+  .cds-btn-block {
+    width: 100%;
+  }
+
+  /* ===== CARD STYLES (from actual Coinbase) ===== */
+  .cds-card {
+    background-color: var(--color-bgElevation1);
+    border-radius: var(--borderRadius-500);
+    padding: var(--space-4);
+    border: 1px solid var(--color-bgLine);
+  }
+  
+  .cds-card-elevated {
+    border: none;
+    box-shadow: var(--shadow-elevation1);
+  }
+  
+  .cds-card-interactive {
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+  }
+  
+  .cds-card-interactive:hover {
+    background-color: var(--color-bgTertiaryHovered);
+  }
+
+  /* ===== INPUT STYLES (from actual Coinbase) ===== */
+  .cds-input {
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    font-family: var(--cds-font-text);
+    font-size: 16px;
+    color: var(--color-fg);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-bgLineHeavy);
+    border-radius: var(--borderRadius-200);
+    outline: none;
+    transition: all 200ms ease-in-out;
+    min-height: 48px;
+  }
+  
+  .cds-input:focus {
+    border-color: var(--color-fgPrimary);
+    box-shadow: 0 0 0 2px var(--color-bgPrimaryWash);
+  }
+  
+  .cds-input::placeholder {
+    color: var(--color-fgMuted);
+  }
+  
+  .cds-input-label {
+    display: block;
+    margin-bottom: var(--space-1);
+    font-family: var(--cds-font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-fg);
+  }
+
+  /* ===== NAVIGATION STYLES (from actual Coinbase) ===== */
+  .cds-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-bgLine);
+    min-height: 64px;
+  }
+  
+  .cds-nav-link {
+    font-family: var(--cds-font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-fgMuted);
+    text-decoration: none;
+    padding: var(--space-1_5) var(--space-2);
+    border-radius: var(--borderRadius-200);
+    transition: all 200ms ease-in-out;
+  }
+  
+  .cds-nav-link:hover {
+    color: var(--color-fg);
+    background-color: var(--color-bgTertiaryHovered);
+  }
+  
+  .cds-nav-link-active {
+    color: var(--color-fg);
+  }
+
+  /* ===== CHIP/TAG STYLES ===== */
+  .cds-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-0_5);
+    padding: var(--space-0_5) var(--space-2);
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: var(--borderRadius-1000);
+    background-color: var(--color-bgSecondary);
+    color: var(--color-fg);
+  }
+  
+  .cds-chip-positive {
+    background-color: var(--color-bgPositiveWash);
+    color: var(--color-fgPositive);
+  }
+  
+  .cds-chip-negative {
+    background-color: var(--color-bgNegativeWash);
+    color: var(--color-fgNegative);
+  }
+  
+  .cds-chip-primary {
+    background-color: var(--color-bgPrimaryWash);
+    color: var(--color-fgPrimary);
+  }
+
+  /* ===== CELL/LIST ITEM STYLES ===== */
+  .cds-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background-color: var(--color-bg);
+    border-radius: var(--borderRadius-300);
+    transition: background-color 200ms ease-in-out;
+  }
+  
+  .cds-cell-interactive {
+    cursor: pointer;
+  }
+  
+  .cds-cell-interactive:hover {
+    background-color: var(--color-bgTertiaryHovered);
+  }
+
+  /* ===== AVATAR STYLES ===== */
+  .cds-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--borderRadius-1000);
+    overflow: hidden;
+    background-color: var(--color-bgSecondary);
+  }
+  
+  .cds-avatar-sm {
+    width: var(--avatarSize-s);
+    height: var(--avatarSize-s);
+  }
+  
+  .cds-avatar-md {
+    width: var(--avatarSize-m);
+    height: var(--avatarSize-m);
+  }
+  
+  .cds-avatar-lg {
+    width: var(--avatarSize-l);
+    height: var(--avatarSize-l);
+  }
+  
+  .cds-avatar-xl {
+    width: var(--avatarSize-xl);
+    height: var(--avatarSize-xl);
+  }
+
+  /* ===== DIVIDER ===== */
+  .cds-divider {
+    border: none;
+    height: 1px;
+    background-color: var(--color-bgLine);
+    margin: var(--space-3) 0;
+  }
+
+  /* ===== BADGE ===== */
+  .cds-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 var(--space-1);
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: var(--borderRadius-1000);
+    background-color: var(--color-fgPrimary);
+    color: var(--color-fgInverse);
+  }
+  
+  /* ===== TRAPDOOR LINK (from actual Coinbase) ===== */
+  .trapdoor-link {
+    border-radius: var(--borderRadius-900);
+    transition: all 200ms ease-in-out;
+    transition-property: background-color;
+    padding: var(--space-3);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  
+  .trapdoor-link:hover {
+    background-color: var(--color-bgTertiaryHovered);
+  }
+  
+  .trapdoor-link-text {
+    transition: all 200ms ease-in-out;
+    transition-property: text-decoration-color;
+    text-decoration: underline transparent;
+  }
+  
+  .trapdoor-link:hover .trapdoor-link-text {
+    text-decoration-color: currentColor;
+  }
+}
+
+/* ===== UTILITY CLASSES (from actual Coinbase) ===== */
+@layer utilities {
+  /* Text Colors */
+  .text-fg { color: var(--color-fg); }
+  .text-fg-muted { color: var(--color-fgMuted); }
+  .text-fg-inverse { color: var(--color-fgInverse); }
+  .text-fg-primary { color: var(--color-fgPrimary); }
+  .text-fg-positive { color: var(--color-fgPositive); }
+  .text-fg-negative { color: var(--color-fgNegative); }
+  .text-fg-warning { color: var(--color-fgWarning); }
+  
+  /* Background Colors */
+  .bg-cb { background-color: var(--color-bg); }
+  .bg-cb-alternate { background-color: var(--color-bgAlternate); }
+  .bg-cb-inverse { background-color: var(--color-bgInverse); }
+  .bg-cb-primary { background-color: var(--color-bgPrimary); }
+  .bg-cb-secondary { background-color: var(--color-bgSecondary); }
+  .bg-cb-tertiary { background-color: var(--color-bgTertiary); }
+  .bg-cb-positive { background-color: var(--color-bgPositive); }
+  .bg-cb-negative { background-color: var(--color-bgNegative); }
+  .bg-cb-elevation1 { background-color: var(--color-bgElevation1); }
+  .bg-cb-elevation2 { background-color: var(--color-bgElevation2); }
+  
+  /* Coinbase Blue */
+  .bg-coinbase-blue { background-color: rgb(0,82,255); }
+  .text-coinbase-blue { color: rgb(0,82,255); }
+  
+  /* Border Colors */
+  .border-line { border-color: var(--color-bgLine); }
+  .border-line-heavy { border-color: var(--color-bgLineHeavy); }
+  .border-primary { border-color: var(--color-bgLinePrimary); }
+  
+  /* Border Radius */
+  .rounded-cb-0 { border-radius: var(--borderRadius-0); }
+  .rounded-cb-100 { border-radius: var(--borderRadius-100); }
+  .rounded-cb-200 { border-radius: var(--borderRadius-200); }
+  .rounded-cb-300 { border-radius: var(--borderRadius-300); }
+  .rounded-cb-400 { border-radius: var(--borderRadius-400); }
+  .rounded-cb-500 { border-radius: var(--borderRadius-500); }
+  .rounded-cb-600 { border-radius: var(--borderRadius-600); }
+  .rounded-cb-full { border-radius: var(--borderRadius-1000); }
+  
+  /* Spacing utilities */
+  .p-space-0 { padding: var(--space-0); }
+  .p-space-1 { padding: var(--space-1); }
+  .p-space-2 { padding: var(--space-2); }
+  .p-space-3 { padding: var(--space-3); }
+  .p-space-4 { padding: var(--space-4); }
+  .p-space-5 { padding: var(--space-5); }
+  .p-space-6 { padding: var(--space-6); }
+  
+  .gap-space-0 { gap: var(--space-0); }
+  .gap-space-1 { gap: var(--space-1); }
+  .gap-space-2 { gap: var(--space-2); }
+  .gap-space-3 { gap: var(--space-3); }
+  .gap-space-4 { gap: var(--space-4); }
+  .gap-space-5 { gap: var(--space-5); }
+  .gap-space-6 { gap: var(--space-6); }
+  
+  /* Text Gradient */
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* Text wrap (from actual Coinbase) */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Focus Ring */
+  .focus-ring:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-bgPrimaryWash);
+  }
+  
+  /* Truncate Text */
+  .cds-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  /* Line Clamp */
+  .cds-line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .cds-line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* Tabular Numbers */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+  
+  /* Link styles (from actual Coinbase) */
+  .link-underline {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  
+  /* Shadow utilities */
+  .shadow-elevation1 {
+    box-shadow: var(--shadow-elevation1);
+  }
+  
+  .shadow-elevation2 {
+    box-shadow: var(--shadow-elevation2);
+  }
+}
