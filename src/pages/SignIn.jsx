@@ -154,8 +154,24 @@ const SignIn = () => {
             </button>
           </div>
 
+          {/* Demo Warning */}
+          <div
+            className="mt-6 p-3 rounded-xl flex items-center gap-2.5 text-center justify-center"
+            style={{
+              backgroundColor: 'rgba(245, 158, 11, 0.1)',
+              border: '1px solid rgba(245, 158, 11, 0.3)',
+            }}
+          >
+            <svg className="w-4 h-4 flex-shrink-0" style={{ color: '#d97706' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+            <span style={{ fontSize: '12px', fontWeight: 600, color: '#92400e' }}>
+              Demo app – do not use your real password
+            </span>
+          </div>
+
           {/* Security Notice */}
-          <p className="mt-8 text-center cds-legal text-fg-muted">
+          <p className="mt-4 text-center cds-legal text-fg-muted">
             This site is protected by reCAPTCHA and the Google{' '}
             <a href="#" className="text-fg-primary hover:underline">Privacy Policy</a> and{' '}
             <a href="#" className="text-fg-primary hover:underline">Terms of Service</a> apply.

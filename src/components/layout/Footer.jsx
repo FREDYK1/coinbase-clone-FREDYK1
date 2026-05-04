@@ -252,6 +252,34 @@ const Footer = () => {
           </a>
         </div>
 
+        {/* Demo Disclaimer */}
+        <div
+          className="mt-8 p-4 rounded-xl flex items-start gap-3"
+          style={{
+            backgroundColor: 'rgba(245, 158, 11, 0.08)',
+            border: '1px solid rgba(245, 158, 11, 0.25)',
+          }}
+        >
+          <svg className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#d97706' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <div>
+            <p className="text-sm font-semibold" style={{ color: '#92400e' }}>
+              📋 Demo Project Disclaimer
+            </p>
+            <p className="text-xs mt-1" style={{ color: '#92400e', opacity: 0.85 }}>
+              This is a student demonstration project built for educational purposes only. It is not a real cryptocurrency exchange.
+              Please <strong>do not enter real personal information, passwords, or financial data</strong>. No real transactions
+              are processed. This project is not affiliated with, endorsed by, or connected to Coinbase, Inc.
+            </p>
+          </div>
+        </div>
+
         {/* Bottom Bar */}
         <div className="mt-8 pt-8 border-t border-slate-200">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">

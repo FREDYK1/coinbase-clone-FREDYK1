@@ -402,7 +402,7 @@ function Navbar() {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white">
+    <header className="fixed inset-x-0 z-50 border-b border-slate-200 bg-white" style={{ top: 'var(--demo-banner-height, 0px)' }}>
       <Container className="flex h-16 items-center justify-between gap-6">
         <Link to="/" className="flex items-center gap-2">
           <img src={logoMark} alt="Cryptocurrencies logo" className="h-8 w-8" />

@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "r
 import { useAuth } from "./context/AuthContext";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import DemoBanner from "./components/layout/DemoBanner";
 import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import AssetDetail from "./pages/AssetDetail";
@@ -36,11 +37,12 @@ const Layout = ({ children }) => {
   const hideLayout = ['/login', '/register', '/signin', '/signup'].includes(location.pathname);
 
   if (hideLayout) {
-    return <>{children}</>;
+    return <><DemoBanner />{children}</>;
   }
 
   return (
     <div className="min-h-screen flex flex-col">
+      <DemoBanner />
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />
