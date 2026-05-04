@@ -1,16 +1,50 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CryptoRow from '../components/crypto/CryptoRow';
-import { cryptoData } from '../data';
+import { cryptoData as fallbackCryptoData } from '../data';
+import API from '../api/axios';
 
 /**
  * Coinbase-styled Explore page
  * Matches actual Coinbase explore/assets design
+ * Fetches crypto data from backend API with fallback to local data
  */
 const Explore = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('marketCap');
   const [sortOrder, setSortOrder] = useState('desc');
   const [activeFilter, setActiveFilter] = useState('All');
+  const [cryptoData, setCryptoData] = useState(fallbackCryptoData);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch crypto data from API
+  useEffect(() => {
+    const fetchCryptos = async () => {
+      try {
+        const { data } = await API.get('/crypto');
+        if (data.success && data.data.length > 0) {
+          setCryptoData(
+            data.data.map((crypto) => ({
+              id: crypto._id,
+              name: crypto.name,
+              symbol: crypto.symbol,
+              price: crypto.price,
+              change24h: crypto.change24h,
+              marketCap: crypto.marketCap || 0,
+              volume24h: crypto.volume24h || 0,
+              image: crypto.image,
+              sparkline: [], // API doesn't provide sparkline data
+            }))
+          );
+        }
+      } catch (error) {
+        console.log('Using fallback crypto data for Explore page');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCryptos();
+  }, []);
 
   // Filter cryptos based on search
   const filteredCryptos = cryptoData.filter(
@@ -188,7 +222,12 @@ const Explore = () => {
 
         {/* Crypto List */}
         <div className="cds-card" style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0, borderTop: 'none' }}>
-          {sortedCryptos.length > 0 ? (
+          {isLoading ? (
+            <div className="py-12 text-center">
+              <div className="w-12 h-12 border-4 border-[#0052ff] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <p className="b-ff b-fs b-fw b-lh" style={{ color: 'var(--color-fgMuted)' }}>Loading cryptocurrencies...</p>
+            </div>
+          ) : sortedCryptos.length > 0 ? (
             sortedCryptos.map((crypto, index) => (
               <CryptoRow key={crypto.id} crypto={crypto} index={index} />
             ))

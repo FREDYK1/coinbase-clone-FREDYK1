@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { cryptoData, formatCurrency } from '../data';
+import { cryptoData as fallbackCryptoData, formatCurrency } from '../data';
+import API from '../api/axios';
 import Button from '../components/common/Button';
 import {
   AdvancedTrade,
@@ -15,20 +16,66 @@ import {
 /**
  * Coinbase-styled Home page
  * Matches actual Coinbase homepage design from www.coinbase.com
+ * Fetches crypto data from backend API with fallback to local data
  */
 const Home = () => {
   const [email, setEmail] = useState('');
   const [activeTab, setActiveTab] = useState('tradable');
+  const [allCryptos, setAllCryptos] = useState(fallbackCryptoData);
+  const [gainersCryptos, setGainersCryptos] = useState([]);
+  const [newCryptos, setNewCryptos] = useState([]);
+
+  // Fetch crypto data from API
+  useEffect(() => {
+    const fetchCryptos = async () => {
+      try {
+        const [allRes, gainersRes, newRes] = await Promise.all([
+          API.get('/crypto'),
+          API.get('/crypto/gainers'),
+          API.get('/crypto/new'),
+        ]);
+
+        if (allRes.data.success) {
+          setAllCryptos(allRes.data.data.map(mapCryptoData));
+        }
+        if (gainersRes.data.success) {
+          setGainersCryptos(gainersRes.data.data.map(mapCryptoData));
+        }
+        if (newRes.data.success) {
+          setNewCryptos(newRes.data.data.map(mapCryptoData));
+        }
+      } catch (error) {
+        // Fallback to local data if API fails
+        console.log('Using fallback crypto data');
+        setGainersCryptos([...fallbackCryptoData].sort((a, b) => b.change24h - a.change24h));
+        setNewCryptos(fallbackCryptoData.slice(4, 10));
+      }
+    };
+
+    fetchCryptos();
+  }, []);
+
+  // Map API data to frontend format
+  const mapCryptoData = (crypto) => ({
+    id: crypto._id,
+    name: crypto.name,
+    symbol: crypto.symbol,
+    price: crypto.price,
+    change24h: crypto.change24h,
+    marketCap: crypto.marketCap || 0,
+    volume24h: crypto.volume24h || 0,
+    image: crypto.image,
+  });
 
   // Filter cryptos based on tab
   const getFilteredCryptos = () => {
     switch (activeTab) {
       case 'gainers':
-        return [...cryptoData].sort((a, b) => b.change24h - a.change24h).slice(0, 6);
+        return gainersCryptos.slice(0, 6);
       case 'new':
-        return cryptoData.slice(4, 10);
+        return newCryptos.slice(0, 6);
       default:
-        return cryptoData.slice(0, 6);
+        return allCryptos.slice(0, 6);
     }
   };
 

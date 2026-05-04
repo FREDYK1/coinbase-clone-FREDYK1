@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
 
 /**
  * CDS-styled Sign In page
  * Matches Coinbase sign in design
+ * Wired to backend API for authentication
  */
 
 // Coinbase logo component - defined outside the main component
@@ -20,11 +22,28 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle sign in logic
-    console.log('Sign in:', { email, password });
+    setError('');
+    setIsLoading(true);
+
+    try {
+      const data = await login(email, password);
+      if (data.success) {
+        navigate('/');
+      }
+    } catch (err) {
+      const message = err.response?.data?.message || 'Login failed. Please try again.';
+      setError(message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -45,6 +64,13 @@ const SignIn = () => {
               </Link>
             </p>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mb-6 p-4 rounded-xl" style={{ backgroundColor: 'rgba(240, 97, 109, 0.1)', border: '1px solid rgba(240, 97, 109, 0.3)' }}>
+              <p className="cds-body" style={{ color: 'rgb(240, 97, 109)' }}>{error}</p>
+            </div>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -97,8 +123,8 @@ const SignIn = () => {
               </Link>
             </div>
 
-            <Button type="submit" fullWidth size="lg">
-              Sign in
+            <Button type="submit" fullWidth size="lg" disabled={isLoading}>
+              {isLoading ? 'Signing in...' : 'Sign in'}
             </Button>
           </form>
 

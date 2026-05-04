@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Container from "../common/Container";
 import Button from "../common/Button";
 import { navLinks } from "../../data/navLinks.ts";
 import logoMark from "../../assets/logo.svg";
+import { useAuth } from "../../context/AuthContext";
 
 function Navbar() {
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [showIndividuals, setShowIndividuals] = useState(false);
   const [showBusiness, setShowBusiness] = useState(false);
@@ -533,17 +536,43 @@ function Navbar() {
               />
             </svg>
           </button>
-          <Button
-            as={Link}
-            to="/signin"
-            variant="ghost"
-            className="text-slate-700 hover:text-slate-900"
-          >
-            Sign in
-          </Button>
-          <Button as={Link} to="/signup" variant="primary" className="px-4 py-2 text-sm">
-            Get started
-          </Button>
+          {isAuthenticated ? (
+            <>
+              <Link
+                to="/profile"
+                className="flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0052ff] text-white text-xs font-bold">
+                  {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+                </div>
+                <span>{user?.name?.split(' ')[0] || 'Profile'}</span>
+              </Link>
+              <Button
+                variant="ghost"
+                className="text-slate-700 hover:text-slate-900"
+                onClick={async () => {
+                  await logout();
+                  navigate('/signin');
+                }}
+              >
+                Sign out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                as={Link}
+                to="/signin"
+                variant="ghost"
+                className="text-slate-700 hover:text-slate-900"
+              >
+                Sign in
+              </Button>
+              <Button as={Link} to="/signup" variant="primary" className="px-4 py-2 text-sm">
+                Get started
+              </Button>
+            </>
+          )}
         </div>
 
         <button
@@ -589,12 +618,32 @@ function Navbar() {
               </NavLink>
             ))}
             <div className="flex flex-col gap-3">
-              <Button as={Link} to="/signin" variant="ghost">
-                Sign in
-              </Button>
-              <Button as={Link} to="/signup" variant="primary">
-                Sign up
-              </Button>
+              {isAuthenticated ? (
+                <>
+                  <Button as={Link} to="/profile" variant="ghost" onClick={() => setOpen(false)}>
+                    My Profile
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={async () => {
+                      await logout();
+                      setOpen(false);
+                      navigate('/signin');
+                    }}
+                  >
+                    Sign out
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button as={Link} to="/signin" variant="ghost">
+                    Sign in
+                  </Button>
+                  <Button as={Link} to="/signup" variant="primary">
+                    Sign up
+                  </Button>
+                </>
+              )}
             </div>
           </Container>
         </div>

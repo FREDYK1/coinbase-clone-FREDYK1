@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
 
 /**
  * CDS-styled Sign Up page
  * Matches Coinbase sign up design
+ * Wired to backend API for registration
  */
 
 // Coinbase logo component - defined outside the main component
@@ -26,16 +28,44 @@ const SignUp = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { register } = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle sign up logic
-    console.log('Sign up:', formData);
+    setError('');
+    setSuccess('');
+
+    // Validate passwords match
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const name = `${formData.firstName} ${formData.lastName}`.trim();
+      const data = await register(name, formData.email, formData.password);
+      if (data.success) {
+        setSuccess('Account created successfully! Redirecting...');
+        setTimeout(() => navigate('/'), 1500);
+      }
+    } catch (err) {
+      const message = err.response?.data?.message || 'Registration failed. Please try again.';
+      setError(message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const passwordStrength = (password) => {
@@ -98,11 +128,25 @@ const SignUp = () => {
             <h1 className="mt-6 cds-display-3 text-fg">Create your account</h1>
             <p className="mt-2 cds-body text-fg-muted">
               Already have an account?{' '}
-              <Link to="/signin" className="text-fg-primary hover:underline font-medium">
+              <Link to="/login" className="text-fg-primary hover:underline font-medium">
                 Sign in
               </Link>
             </p>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mb-6 p-4 rounded-xl" style={{ backgroundColor: 'rgba(240, 97, 109, 0.1)', border: '1px solid rgba(240, 97, 109, 0.3)' }}>
+              <p className="cds-body" style={{ color: 'rgb(240, 97, 109)' }}>{error}</p>
+            </div>
+          )}
+
+          {/* Success Message */}
+          {success && (
+            <div className="mb-6 p-4 rounded-xl" style={{ backgroundColor: 'rgba(39, 173, 117, 0.1)', border: '1px solid rgba(39, 173, 117, 0.3)' }}>
+              <p className="cds-body" style={{ color: 'rgb(39, 173, 117)' }}>{success}</p>
+            </div>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -222,9 +266,9 @@ const SignUp = () => {
               type="submit"
               fullWidth
               size="lg"
-              disabled={!agreeToTerms || formData.password !== formData.confirmPassword}
+              disabled={!agreeToTerms || isLoading}
             >
-              Create free account
+              {isLoading ? 'Creating account...' : 'Create free account'}
             </Button>
           </form>
 
