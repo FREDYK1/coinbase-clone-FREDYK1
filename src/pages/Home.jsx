@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { cryptoData as fallbackCryptoData, formatCurrency } from '../data';
 import API from '../api/axios';
 import Button from '../components/common/Button';
@@ -19,6 +19,7 @@ import {
  * Fetches crypto data from backend API with fallback to local data
  */
 const Home = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [activeTab, setActiveTab] = useState('tradable');
   const [allCryptos, setAllCryptos] = useState(fallbackCryptoData);
@@ -82,7 +83,7 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Navigate to signup with email
-    window.location.href = `/signup?email=${encodeURIComponent(email)}`;
+    navigate(`/register?email=${encodeURIComponent(email)}`);
   };
 
   return (
